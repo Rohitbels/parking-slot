@@ -110,7 +110,7 @@ export const NewBookingModal = ({ open, handleClose }) => {
                 <ActualBooking bookingDetails={bookingDetails} handleNext={handleNext} name={name} companyName={companyName} price={price} />
           )}
           {activeStep === 2 && (
-            <PaymentPage handleNext={handleNext} />
+            <PaymentPage bookingDetails={bookingDetails} handleNext={handleNext} />
           )}
           {activeStep === 3 && (
             <SuccessPage bookingDetails={bookingDetails} />
