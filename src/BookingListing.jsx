@@ -84,7 +84,7 @@ const BookingGrid = () => {
       </Button>
         </Grid>
       </Grid>
-      <NewBookingModal open={open} handleClose={() => {
+      <NewBookingModal key={open} open={open} handleClose={() => {
         setOpen(false)
       }}  />
     </Container>

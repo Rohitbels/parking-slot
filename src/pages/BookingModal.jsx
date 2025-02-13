@@ -1,5 +1,5 @@
 import { Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, Stepper, Step, StepLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, DialogActions } from "@mui/material";
-import { useState } from "react";
+import { act, useState } from "react";
 import ActualBooking from "./ActualBooking";
 import SuccessPage from "./success";
 import PaymentPage from "./payment";
@@ -39,16 +39,23 @@ export const NewBookingModal = ({ open, handleClose }) => {
     const handleNext = (...rest) => {
       console.log('All ===>', rest);
 
+      if(activeStep === 0) {
+        const [{ companyName, availfourWheelerCapacity, availtwoWheelerCapacity }] = rest;
+        setBookingDetails( prev => ({ ...prev, companyName, availfourWheelerCapacity, availtwoWheelerCapacity}));        
+      }
+
+
       if(activeStep === 1 ) {
         const [{ calculatePrice, fourWheelerCapacity, twoWheelerCapacity }] = rest;
-        setBookingDetails({ calculatePrice, fourWheelerCapacity, twoWheelerCapacity});
-        console.log('Read ===>', calculatePrice, fourWheelerCapacity, twoWheelerCapacity);
+        setBookingDetails( prev => ({ ...prev, calculatePrice, fourWheelerCapacity, twoWheelerCapacity}));
+        
   
       }
 
       setActiveStep((prev) => prev + 1)
     };
   
+    console.log('Read ===>', bookingDetails);
     return (
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg" >
         <DialogTitle>New Booking</DialogTitle>
@@ -83,7 +90,13 @@ export const NewBookingModal = ({ open, handleClose }) => {
                       <TableCell>{booking.organisationName}</TableCell>
                       <TableCell>{booking.availableSlotsForFourheelers}</TableCell>
                       <TableCell>
-                        <Button variant="contained" onClick={handleNext}>
+                        <Button variant="contained" onClick={() => {
+                            handleNext({
+                              companyName: booking.organisationName,
+                              availfourWheelerCapacity: booking.availableSlotsForTwoWheelers,
+                              availtwoWheelerCapacity: booking.availableSlotsForTwoWheelers, 
+                            })
+                        }}>
                           Book
                         </Button>
                       </TableCell>
@@ -94,7 +107,7 @@ export const NewBookingModal = ({ open, handleClose }) => {
             </TableContainer>
           )}
           {activeStep === 1 && (
-                <ActualBooking handleNext={handleNext} name={name} companyName={companyName} price={price} />
+                <ActualBooking bookingDetails={bookingDetails} handleNext={handleNext} name={name} companyName={companyName} price={price} />
           )}
           {activeStep === 2 && (
             <PaymentPage handleNext={handleNext} />
