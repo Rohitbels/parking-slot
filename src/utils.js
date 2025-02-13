@@ -15,6 +15,9 @@ function formatTimestamp(timestamp) {
     return `${day}/${month}/${year} ${hours}:${minutes} ${amPm}`;
 }
 
+const apiUrl = 'http://908e-167-103-119-81.ngrok-free.app/api';
+
 export {
-    formatTimestamp
+    formatTimestamp,
+    apiUrl
 }
