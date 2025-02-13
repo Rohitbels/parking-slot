@@ -85,7 +85,7 @@ const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, hand
           value={fourWheelerCapacity}
           onChange={(e) => setFourWheelerCapacity(e.target.value)}
         />
-        <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }} onClick={handleNext}>
+        <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }} onClick={() => handleNext({calculatePrice, fourWheelerCapacity, twoWheelerCapacity})}>
           Book
         </Button>
       </CardContent>

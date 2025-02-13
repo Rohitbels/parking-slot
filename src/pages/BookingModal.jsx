@@ -11,10 +11,12 @@ const availableBookings = [
     { company: "Company C", slots: 8 },
   ];
 
-  const price = {
-    2: 100,
-    1: 50
-  }
+  const price =  { car: 100, bike: 50 }
+
+  const companyName = "ThinkProject";
+
+  const name = "Ashu Kharbanda";
+
 
   const avail = [
     {
@@ -33,8 +35,19 @@ const availableBookings = [
 
 export const NewBookingModal = ({ open, handleClose }) => {
     const [activeStep, setActiveStep] = useState(0);
+    const [bookingDetails, setBookingDetails ] = useState({});    
+    const handleNext = (...rest) => {
+      console.log('All ===>', rest);
+
+      if(activeStep === 1 ) {
+        const [{ calculatePrice, fourWheelerCapacity, twoWheelerCapacity }] = rest;
+        setBookingDetails({ calculatePrice, fourWheelerCapacity, twoWheelerCapacity});
+        console.log('Read ===>', calculatePrice, fourWheelerCapacity, twoWheelerCapacity);
   
-    const handleNext = () => setActiveStep((prev) => prev + 1);
+      }
+
+      setActiveStep((prev) => prev + 1)
+    };
   
     return (
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg" >
@@ -81,13 +94,13 @@ export const NewBookingModal = ({ open, handleClose }) => {
             </TableContainer>
           )}
           {activeStep === 1 && (
-                <ActualBooking handleNext={handleNext} name={"Rohit"} companyName="ThinkProject" price={100} />
+                <ActualBooking handleNext={handleNext} name={name} companyName={companyName} price={price} />
           )}
           {activeStep === 2 && (
             <PaymentPage handleNext={handleNext} />
           )}
           {activeStep === 3 && (
-            <SuccessPage />
+            <SuccessPage bookingDetails={bookingDetails} />
           )}
         </DialogContent>
         <DialogActions>

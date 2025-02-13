@@ -51,10 +51,11 @@ const BookingCard = ({ booking }) => (
         gap: '4px'
       }}>
         <Typography variant="h6" component="div">
-        {booking.location} for {booking.userName}
+        {booking.location}
       </Typography>
       <LabelValue label={"Date & Time "} value={formatTimestamp(booking.dateOfReservation)} />
       <LabelValue label={"Booking type"} value={['Two wheeler', 'Car', ][booking.bookingType-1]} />
+      <LabelValue label={"No. of Bookings"} value={booking.bookingSlots} />
       </div>
       <Typography variant="body2">
         
