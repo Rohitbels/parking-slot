@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import MyBooking from "./pages/MyBooking";
 import PageNotFound from "./pages/PageNotFound";
+import BookingListing from "./pages/adminhome"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="mybooking" element={<MyBooking />} />
+          <Route path="/adminhome" element={<BookingListing />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>

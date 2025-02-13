@@ -17,7 +17,7 @@ const Admin = () => {
       twoWheelerPrice,
       fourWheelerPrice,
     });
-    alert("Company Registered Successfully!");
+     window.location.href = "/adminhome";
   };
 
   return (
