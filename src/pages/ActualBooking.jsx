@@ -1,23 +1,50 @@
 import { useState } from "react";
 import {
   CardContent,
-  Typography,
   Button,
-  MenuItem,
-  Select,
   FormControl,
-  InputLabel,
   TextField,
+  TableContainer,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
+  Paper,
 } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
 const ActualBooking = ({ name, companyName, price }) => {
-  const [capacity, setCapacity] = useState("");
   const [dateTime, setDateTime] = useState("");
+  const [fourWheelerCapacity, setFourWheelerCapacity] = useState("");
+  const [twoWheelerCapacity, setTwoWheelerCapacity] = useState("");
 
   return (
     <div>
       <CardContent>
+        <TableContainer component={Paper} sx={{ mb: 2 }}>
+          <Table>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <strong>Name:</strong>
+                </TableCell>
+                <TableCell>{name}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <strong>Company Name:</strong>
+                </TableCell>
+                <TableCell>{companyName}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <strong>Price:</strong>
+                </TableCell>
+                <TableCell>{price}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
         <FormControl fullWidth sx={{ mt: 2 }}>
           <TextField
             label="Select Date & Time"
@@ -31,26 +58,22 @@ const ActualBooking = ({ name, companyName, price }) => {
             }}
           />
         </FormControl>
-        <FormControl fullWidth sx={{ mt: 2 }}>
-          <InputLabel>Select Capacity</InputLabel>
-          <Select
-            value={capacity}
-            onChange={(e) => setCapacity(e.target.value)}
-          >
-            <MenuItem value="2 wheeler">2 Wheeler</MenuItem>
-            <MenuItem value="4 wheeler">4 Wheeler</MenuItem>
-          </Select>
-        </FormControl>
-        <Typography variant="body1" sx={{ mt: 2 }}>
-          <strong>Name:</strong> {name}
-        </Typography>
-        <Typography variant="body1" sx={{ mt: 2 }}>
-          <strong>Company Name:</strong> {companyName}
-        </Typography>
-        <Typography variant="body1" sx={{ mt: 2 }}>
-          <strong>Price:</strong> {price}
-        </Typography>
-
+        <TextField
+          sx={{ mt: 2 }}
+          fullWidth
+          label="2 Wheeler Capacity"
+          type="number"
+          value={twoWheelerCapacity}
+          onChange={(e) => setTwoWheelerCapacity(e.target.value)}
+        />
+        <TextField
+          sx={{ mt: 2 }}
+          fullWidth
+          label="4 Wheeler Capacity"
+          type="number"
+          value={fourWheelerCapacity}
+          onChange={(e) => setFourWheelerCapacity(e.target.value)}
+        />
         <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
           Book
         </Button>
