@@ -1,4 +1,4 @@
-import { Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, Stepper, Step, StepLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from "@mui/material";
+import { Container, Grid, Card, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, Stepper, Step, StepLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, DialogActions } from "@mui/material";
 import { useState } from "react";
 import ActualBooking from "./ActualBooking";
 
@@ -24,6 +24,12 @@ export const NewBookingModal = ({ open, handleClose }) => {
             </Step>
             <Step>
               <StepLabel> Add Details</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel> Payment Details</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel> Booked Slot Details</StepLabel>
             </Step>
           </Stepper>
           {activeStep === 0 && (
@@ -56,6 +62,17 @@ export const NewBookingModal = ({ open, handleClose }) => {
                 <ActualBooking />
           )}
         </DialogContent>
+        <DialogActions>
+            <Button onClick={() => {
+                setActiveStep(n => {
+
+                    if(n > 0) {
+                        return n-1;
+                    }
+                })
+            }}>Back</Button>
+            <Button>CLose</Button>
+        </DialogActions>
       </Dialog>
     );
   };
