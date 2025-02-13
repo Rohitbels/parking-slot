@@ -11,6 +11,43 @@ import {
 import { NewBookingModal } from "./pages/BookingModal";
 import { apiUrl, formatTimestamp } from "./utils";
 import LabelValue from "./LabelValue";
+import Qr from "./pages/Qrcode";
+import AlreadyBooked from "./pages/AlreadyBooked";
+
+const bookings = [
+  { location: "Downtown Parking", type: "Car", date: "2025-02-14", time: "10:30 AM" },
+  { location: "Mall Basement", type: "Two-Wheeler", date: "2025-02-15", time: "2:00 PM" },
+  { location: "Office Tower A", type: "Car", date: "2025-02-16", time: "8:00 AM" },
+  { location: "City Center", type: "Two-Wheeler", date: "2025-02-17", time: "6:30 PM" },
+  { location: "City Center", type: "Two-Wheeler", date: "2025-02-17", time: "6:30 PM" },
+  { location: "City Center", type: "Two-Wheeler", date: "2025-02-17", time: "6:30 PM" },
+  { location: "City Center", type: "Two-Wheeler", date: "2025-02-17", time: "6:30 PM" },
+];
+
+
+const bk = [
+  {
+    "userId": 1,
+    "userName": "John Doe",
+    "userOrganisationId": 1,
+    "userOrganisationName": "ABC Corp",
+    "bookingOrganisationId": 1,
+    "dateOfReservation": "2025-02-13T13:59:28.992512",
+    "bookingType": 1,
+    "bookingSlots": 4
+  },
+  {
+    "userId": 1,
+    "userName": "John Doe",
+    "userOrganisationId": 1,
+    "userOrganisationName": "ABC Corp",
+    "bookingOrganisationId": 1,
+    "dateOfReservation": "2025-02-13T13:58:26.246201",
+    "bookingType": 1,
+    "bookingSlots": 7
+  }
+];
+
 
 const BookingCard = ({ booking }) => (
   <Card sx={{ minWidth: 275, p: 2, boxShadow: 3 }}>

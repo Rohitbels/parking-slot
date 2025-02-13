@@ -6,6 +6,7 @@ import Admin from "./pages/Admin";
 import MyBooking from "./pages/MyBooking";
 import PageNotFound from "./pages/PageNotFound";
 import BookingListing from "./pages/adminhome"
+import Qr from "./pages/Qrcode";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="mybooking" element={<MyBooking />} />
           <Route path="/adminhome" element={<BookingListing />} />
+          <Route path="qr/:qrid" element={<Qr />} />
+           <Route path="mybooking" element={<MyBooking />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
