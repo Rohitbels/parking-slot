@@ -14,11 +14,18 @@ import {
 } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
-const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, handleNext }) => {
+const ActualBooking = ({
+  name,
+  companyName,
+  price = { car: 100, bike: 50 },
+  handleNext,
+  bookingDetails
+}) => {
   const [dateTime, setDateTime] = useState("");
   const [fourWheelerCapacity, setFourWheelerCapacity] = useState("");
   const [twoWheelerCapacity, setTwoWheelerCapacity] = useState("");
   const [calculatePrice, setCalculatePrice] = useState(0);
+  const { availfourWheelerCapacity, availtwoWheelerCapacity } = bookingDetails;
 
   useEffect(() => {
     if (price && price?.car && price?.bike) {
@@ -28,6 +35,17 @@ const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, hand
       setCalculatePrice(carPrice + bikePrice);
     }
   }, [price, fourWheelerCapacity, twoWheelerCapacity]);
+
+  const onClickBook = () => {
+    if (
+      fourWheelerCapacity <= availfourWheelerCapacity &&
+      twoWheelerCapacity <= availtwoWheelerCapacity
+    ) {
+      handleNext({ calculatePrice, fourWheelerCapacity, twoWheelerCapacity });
+    } else {
+      alert("available capacity exceeded!");
+    }
+  };
 
   return (
     <div>
@@ -53,6 +71,18 @@ const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, hand
                 </TableCell>
                 <TableCell>{calculatePrice}</TableCell>
               </TableRow>
+              <TableRow>
+                <TableCell>
+                  <strong>Available Capacity (Two Wheeler) :</strong>
+                </TableCell>
+                <TableCell>{availtwoWheelerCapacity}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <strong>Available Capacity (Four Wheeler) : </strong>
+                </TableCell>
+                <TableCell>{availfourWheelerCapacity}</TableCell>
+              </TableRow>
             </TableBody>
           </Table>
         </TableContainer>
@@ -75,6 +105,7 @@ const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, hand
           label="2 Wheeler Capacity"
           type="number"
           value={twoWheelerCapacity}
+          inputProps={{ min: 1, max: availtwoWheelerCapacity }}
           onChange={(e) => setTwoWheelerCapacity(e.target.value)}
         />
         <TextField
@@ -82,10 +113,17 @@ const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, hand
           fullWidth
           label="4 Wheeler Capacity"
           type="number"
+          inputProps={{ min: 1, max: availfourWheelerCapacity }}
           value={fourWheelerCapacity}
           onChange={(e) => setFourWheelerCapacity(e.target.value)}
         />
-        <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }} onClick={() => handleNext({calculatePrice, fourWheelerCapacity, twoWheelerCapacity})}>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+          onClick={onClickBook}
+        >
           Book
         </Button>
       </CardContent>
