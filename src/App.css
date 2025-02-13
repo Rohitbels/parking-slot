@@ -1,4 +1,6 @@
 /* 1. Use a more-intuitive box-sizing model */
+/* @import "tailwindcss"; */
+
 *, *::before, *::after {
   box-sizing: border-box;
 }

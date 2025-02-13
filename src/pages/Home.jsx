@@ -1,7 +1,8 @@
+import BookingListing from "../BookingListing"
 
 const Home = () => {
   return (
-    <div>home</div>
+    <div className="flex "><BookingListing /> </div>
   )
 }
 
