@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import { Button, Dialog, DialogTitle, DialogContent, Stepper, Step, StepLabel, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, DialogActions } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActualBooking from "./ActualBooking";
 import SuccessPage from "./success";
 import PaymentPage from "./payment";
+import { apiUrl } from "../utils";
 
 
-const availableBookings = [
-    { company: "Company A", slots: 5 },
-    { company: "Company B", slots: 2 },
-    { company: "Company C", slots: 8 },
-  ];
+// const availableBookings = [
+//     { company: "Company A", slots: 5 },
+//     { company: "Company B", slots: 2 },
+//     { company: "Company C", slots: 8 },
+//   ];
 
   const price =  { car: 100, bike: 50 }
 
@@ -18,24 +20,25 @@ const availableBookings = [
   const name = "Ashu Kharbanda";
 
 
-  const avail = [
-    {
-      "organisationId": "eb171cef-1c4e-4eeb-88ca-6fa25720ce5f",
-      "organisationName": "ThinkProject",
-      "availableSlotsForTwoWheelers": 5,
-      "availableSlotsForFourheelers": 5
-    },
-    {
-      "organisationId": "bda96145-142c-4b25-9b37-87c61b5c48e6",
-      "organisationName": "Infosys",
-      "availableSlotsForTwoWheelers": 7,
-      "availableSlotsForFourheelers": 10
-    }
-  ];
+  // const avail = [
+  //   {
+  //     "organisationId": "eb171cef-1c4e-4eeb-88ca-6fa25720ce5f",
+  //     "organisationName": "ThinkProject",
+  //     "availableSlotsForTwoWheelers": 5,
+  //     "availableSlotsForFourheelers": 5
+  //   },
+  //   {
+  //     "organisationId": "bda96145-142c-4b25-9b37-87c61b5c48e6",
+  //     "organisationName": "Infosys",
+  //     "availableSlotsForTwoWheelers": 7,
+  //     "availableSlotsForFourheelers": 10
+  //   }
+  // ];
 
 export const NewBookingModal = ({ open, handleClose }) => {
     const [activeStep, setActiveStep] = useState(0);
     const [bookingDetails, setBookingDetails ] = useState({});    
+    const [availableSlots, setAvailableSlots] = useState([]);
     const handleNext = (...rest) => {
       console.log('All ===>', rest);
 
@@ -54,7 +57,22 @@ export const NewBookingModal = ({ open, handleClose }) => {
 
       setActiveStep((prev) => prev + 1)
     };
-  
+
+    useEffect(() => {
+      fetch(`${apiUrl}/Organisation/slots`, {
+        method: "GET",
+        headers: {
+          Accept: "*/*",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(`setAvailableSlots API resposnes ==>`, data);
+          setAvailableSlots(data);
+        })
+        .catch((error) => console.error("Error:", error));
+    }, []);
+
     console.log('Read ===>', bookingDetails);
     return (
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="lg" >
@@ -85,7 +103,7 @@ export const NewBookingModal = ({ open, handleClose }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {avail.map((booking, index) => (
+                  {availableSlots.map((booking, index) => (
                     <TableRow key={index}>
                       <TableCell>{booking.organisationName}</TableCell>
                       <TableCell>{booking.availableSlotsForFourheelers}</TableCell>
