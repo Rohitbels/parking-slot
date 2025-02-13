@@ -1,18 +1,13 @@
 
 
-
-
 /* Payment container */
-
-/* Payment box */
-.payment-box {
-    background: white;
-    padding: 20px;
-    width: 400px;
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    text-align: center;
+.payment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
+
 
 /* Heading */
 h2 {
@@ -42,10 +37,6 @@ h2 {
     font-weight: bold;
 }
 
-/* Payment Forms */
-.payment-form {
-    display: none;
-}
 
 .payment-form input,
 .payment-form select {
