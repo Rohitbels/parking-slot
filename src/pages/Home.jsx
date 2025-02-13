@@ -1,6 +1,6 @@
 import BookingListing from "../BookingListing"
 import MenuAppBar from "../Header";
-import { NewBookingModal } from "./BookingModal";
+// import { NewBookingModal } from "./BookingModal";
 
 const Home = () => {
   return (
