@@ -1,4 +1,5 @@
-import { useState } from "react";
+/* eslint-disable react/prop-types */
+import { useEffect, useState } from "react";
 import {
   CardContent,
   Button,
@@ -13,10 +14,20 @@ import {
 } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
-const ActualBooking = ({ name, companyName, price, handleNext }) => {
+const ActualBooking = ({ name, companyName, price = { car: 100, bike: 50 }, handleNext }) => {
   const [dateTime, setDateTime] = useState("");
   const [fourWheelerCapacity, setFourWheelerCapacity] = useState("");
   const [twoWheelerCapacity, setTwoWheelerCapacity] = useState("");
+  const [calculatePrice, setCalculatePrice] = useState(0);
+
+  useEffect(() => {
+    if (price && price?.car && price?.bike) {
+      const carPrice = price.car * fourWheelerCapacity;
+      const bikePrice = price.bike * twoWheelerCapacity;
+
+      setCalculatePrice(carPrice + bikePrice);
+    }
+  }, [price, fourWheelerCapacity, twoWheelerCapacity]);
 
   return (
     <div>
@@ -40,7 +51,7 @@ const ActualBooking = ({ name, companyName, price, handleNext }) => {
                 <TableCell>
                   <strong>Price:</strong>
                 </TableCell>
-                <TableCell>{price}</TableCell>
+                <TableCell>{calculatePrice}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
