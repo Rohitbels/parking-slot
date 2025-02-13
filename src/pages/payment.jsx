@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import "./PaymentPage.css";
 
-const PaymentPage = ({ handleNext }) => {
+const PaymentPage = ({ handleNext, bookingDetails }) => {
   const [activeTab, setActiveTab] = useState("card");
 
   return (
     <div className="payment-container">
       <div className="payment-box">
         <h2>💳 Secure Payment</h2>
+        <br/>
+        <h1><strong>Total amount to paid:</strong> ₹{bookingDetails.calculatePrice}</h1>
 
         {/* Payment Method Tabs */}
         <div className="tab-container">
