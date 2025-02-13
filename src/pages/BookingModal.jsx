@@ -41,6 +41,7 @@ export const NewBookingModal = ({ open, handleClose }) => {
 
       if(activeStep === 0) {
         const [{ companyName, availfourWheelerCapacity, availtwoWheelerCapacity }] = rest;
+
         setBookingDetails( prev => ({ ...prev, companyName, availfourWheelerCapacity, availtwoWheelerCapacity}));        
       }
 
@@ -93,7 +94,7 @@ export const NewBookingModal = ({ open, handleClose }) => {
                         <Button variant="contained" onClick={() => {
                             handleNext({
                               companyName: booking.organisationName,
-                              availfourWheelerCapacity: booking.availableSlotsForTwoWheelers,
+                              availfourWheelerCapacity: booking.availableSlotsForFourheelers,
                               availtwoWheelerCapacity: booking.availableSlotsForTwoWheelers, 
                             })
                         }}>

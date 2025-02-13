@@ -4,6 +4,8 @@ import { Container, Grid, Card, CardContent, Typography, Button } from "@mui/mat
 import { NewBookingModal } from "./pages/BookingModal";
 import { formatTimestamp } from "./utils";
 import LabelValue from "./LabelValue";
+import Qr from "./pages/Qrcode";
+import AlreadyBooked from "./pages/AlreadyBooked";
 
 const bookings = [
   { location: "Downtown Parking", type: "Car", date: "2025-02-14", time: "10:30 AM" },
@@ -17,27 +19,27 @@ const bookings = [
 
 
 const bk = [
-    {
-      "userId": "8c392973-d0a2-4a7e-b646-90e3b8d678cd",
-      "userName": "Nitesh",
-      "location": "We Work",
-      "userOrganisationId": "d4ecdb79-1ca3-4862-9b90-82037e1b959e",
-      "bookingOrganisationId": "d22ce9a5-ada5-46eb-9122-fadfa757ec72",
-      "dateOfReservation": "2025-02-13T17:43:04.6596296+05:30",
-      "bookingType": 2,
-      "bookingSlots": 10
-    },
-    {
-      "userId": "58380d4c-806d-424f-beb6-afed4034c8d6",
-      "userName": "Nitesh",
-      "location": "Evershine",
-      "userOrganisationId": "352b3a2b-74f5-40fc-9ce0-6b3ccb22842e",
-      "bookingOrganisationId": "a4ae0675-cf6d-41ca-928e-a0694532a439",
-      "dateOfReservation": "2025-02-13T17:43:04.6600613+05:30",
-      "bookingType": 2,
-      "bookingSlots": 20
-    }
-  ];
+  {
+    "userId": 1,
+    "userName": "John Doe",
+    "userOrganisationId": 1,
+    "userOrganisationName": "ABC Corp",
+    "bookingOrganisationId": 1,
+    "dateOfReservation": "2025-02-13T13:59:28.992512",
+    "bookingType": 1,
+    "bookingSlots": 4
+  },
+  {
+    "userId": 1,
+    "userName": "John Doe",
+    "userOrganisationId": 1,
+    "userOrganisationName": "ABC Corp",
+    "bookingOrganisationId": 1,
+    "dateOfReservation": "2025-02-13T13:58:26.246201",
+    "bookingType": 1,
+    "bookingSlots": 7
+  }
+];
 
 
 const BookingCard = ({ booking }) => (
@@ -66,11 +68,17 @@ const BookingCard = ({ booking }) => (
 
 const BookingGrid = () => {
     const [open, setOpen] = useState(false);
+    const [op, setOp] = React.useState(false);
+
+    const [booking, setBooking] = useState({});
   return (
     <Container sx={{ mt: 4 }}>
       <Grid container spacing={3}>
-        {bk.map((booking, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={booking.bookingOrganisationId}>
+        {bk.map((booking) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={booking.bookingOrganisationId} onClick={() => {
+            setOp(true);
+            setBooking(booking);
+          }}>
             <BookingCard booking={booking} />
           </Grid>
         ))}
@@ -87,6 +95,7 @@ const BookingGrid = () => {
       <NewBookingModal key={open} open={open} handleClose={() => {
         setOpen(false)
       }}  />
+      <AlreadyBooked open={op} setOpen={setOp} booking={booking}   /> 
     </Container>
   );
 };
