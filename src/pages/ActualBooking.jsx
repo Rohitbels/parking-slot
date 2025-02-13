@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 // eslint-disable-next-line react/prop-types
-const ActualBooking = ({ name, companyName, price }) => {
+const ActualBooking = ({ name, companyName, price, handleNext }) => {
   const [dateTime, setDateTime] = useState("");
   const [fourWheelerCapacity, setFourWheelerCapacity] = useState("");
   const [twoWheelerCapacity, setTwoWheelerCapacity] = useState("");
@@ -74,7 +74,7 @@ const ActualBooking = ({ name, companyName, price }) => {
           value={fourWheelerCapacity}
           onChange={(e) => setFourWheelerCapacity(e.target.value)}
         />
-        <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+        <Button variant="contained" color="primary" fullWidth sx={{ mt: 2 }} onClick={handleNext}>
           Book
         </Button>
       </CardContent>
