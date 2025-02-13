@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState } from "react";
 import { Container, Grid, Card, CardContent, Typography, Button } from "@mui/material";
+import { NewBookingModal } from "./pages/BookingModal";
 
 const bookings = [
   { location: "Downtown Parking", type: "Car", date: "2025-02-14", time: "10:30 AM" },
@@ -27,6 +28,7 @@ const BookingCard = ({ booking }) => (
 );
 
 const BookingGrid = () => {
+    const [open, setOpen] = useState(false);
   return (
     <Container sx={{ mt: 4 }}>
       <Grid container spacing={3}>
@@ -39,9 +41,12 @@ const BookingGrid = () => {
             display: 'flex',
             justifyContent: 'center'
         }}>
-            <Button variant="contained">New Booking</Button>
+             <Button variant="contained" color="primary" sx={{ mt: 4 }} onClick={() => setOpen(true)}>
+        New Booking
+      </Button>
         </Grid>
       </Grid>
+      <NewBookingModal open={open}  />
     </Container>
   );
 };
