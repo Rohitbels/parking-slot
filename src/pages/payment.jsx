@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./PaymentPage.css";
 
-const PaymentPage = () => {
+const PaymentPage = ({ handleNext }) => {
   const [activeTab, setActiveTab] = useState("card");
 
   return (
@@ -48,7 +48,7 @@ const PaymentPage = () => {
                 <input type="password" placeholder="***" maxLength="3" />
               </div>
             </div>
-            <button className="pay-btn">Pay Now</button>
+            <button className="pay-btn" onClick={handleNext}>Pay Now</button>
           </div>
         )}
 
@@ -57,7 +57,7 @@ const PaymentPage = () => {
           <div className="payment-form">
             <label>UPI ID</label>
             <input type="text" placeholder="yourname@upi" />
-            <button className="pay-btn">Pay via UPI</button>
+            <button className="pay-btn" onClick={handleNext}>Pay via UPI</button>
           </div>
         )}
 
@@ -72,7 +72,7 @@ const PaymentPage = () => {
               <option>Axis Bank</option>
               <option>Other Banks</option>
             </select>
-            <button className="pay-btn">Proceed to Pay</button>
+            <button className="pay-btn" onClick={handleNext}>Proceed to Pay</button>
           </div>
         )}
       </div>

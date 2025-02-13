@@ -11,6 +11,11 @@ const availableBookings = [
     { company: "Company C", slots: 8 },
   ];
 
+  const price = {
+    2: 100,
+    1: 50
+  }
+
   const avail = [
     {
       "organisationId": "eb171cef-1c4e-4eeb-88ca-6fa25720ce5f",
@@ -76,10 +81,10 @@ export const NewBookingModal = ({ open, handleClose }) => {
             </TableContainer>
           )}
           {activeStep === 1 && (
-                <ActualBooking handleNext={handleNext} />
+                <ActualBooking handleNext={handleNext} name={"Rohit"} companyName="ThinkProject" price={100} />
           )}
           {activeStep === 2 && (
-            <PaymentPage />
+            <PaymentPage handleNext={handleNext} />
           )}
           {activeStep === 3 && (
             <SuccessPage />
