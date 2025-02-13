@@ -1,10 +1,13 @@
 import { useState } from "react";
 import "./login.css"; // Import CSS
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("user");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,7 +52,9 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit">Submit 🚀</button>
+          <button type="submit" onClick={() => {
+            navigate('/home')
+          }}>Submit 🚀</button>
         </form>
       </div>
     </div>
