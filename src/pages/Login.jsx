@@ -1,17 +1,18 @@
 import { useState } from "react";
-import "./login.css"; // Import CSS
-import { useNavigate } from "react-router";
+import "./login.css";
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState("user");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert(`${activeTab.toUpperCase()} Login Successful!`);
+  const handleSubmit = () => {
+    
+    if (activeTab === "admin") {
+      window.location.href = "/admin"; // Redirect to Admin Screen
+    } else {
+      window.location.href = "/home"; // Redirect to Home Screen
+    }
   };
 
   return (
@@ -36,7 +37,7 @@ const Login = () => {
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleSubmit}>
+        <form>
           <label>Login as {activeTab.toUpperCase()}</label>
           <input
             type="text"
@@ -52,9 +53,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <button type="submit" onClick={() => {
-            navigate('/home')
-          }}>Submit 🚀</button>
+          <button type="submit" onClick={handleSubmit}>Submit 🚀</button>
         </form>
       </div>
     </div>
